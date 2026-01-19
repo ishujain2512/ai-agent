@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-import call_function
 from prompts import SYSTEM_PROMPT
 from call_function import available_functions, call_function
 
@@ -38,11 +37,8 @@ def main():
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
     args = parser.parse_args()
 
-    for _ in range(20):
-        messages = [
-            types.Content(role="user", parts=[types.Part(text=args.user_prompt)])
-        ]
-
+    messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
+    for _ in range(5):
         response = generate_response(messages)
         if response.candidates:
             for candidate in response.candidates:
@@ -54,7 +50,7 @@ def main():
         if response.function_calls:
             function_call_results = []
             for function_call in response.function_calls:
-                function_call_result = call_function(function_call)
+                function_call_result = call_function(function_call, verbose=True)
                 if not function_call_result.parts:
                     raise Exception("No parts in function call result")
                 if not function_call_result.parts[0].function_response:

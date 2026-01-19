@@ -43,7 +43,7 @@ def run_python_file(working_directory, file_path, args=None):
 
 
 schema_run_file = types.FunctionDeclaration(
-    name="run_file",
+    name="run_python_file",
     description="Runs a python file in a specified directory relative to the working directory, providing STDOUT and STDERR from python subprocess",
     parameters=types.Schema(
         type=types.Type.OBJECT,

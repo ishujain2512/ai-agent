@@ -26,7 +26,7 @@ def get_files_info(working_directory, directory="."):
             print(
                 f"- {listing}: file_size={os.path.getsize(listing_path)} bytes, is_dir={os.path.isdir(listing_path)}"
             )
-
+        return listings
     except Exception as e:
         return f"Error: {e}"
 
